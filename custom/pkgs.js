@@ -1,46 +1,29 @@
-
-const allPkgs = `
-cxxopts
-freeglut
-freeimage
-giflib
-jasper
-jsoncpp
-jxrlib
-lcms
-libjpeg-turbo
-liblzma
-libpng
-libraw
-libwebp
-libwebp[all]
-openexr
-opengl
-openjpeg
-sdl1
-sqlite3
-tiff
-tinyxml2
-zlib
-`;
-
-function GenScript(pkgs){
-    let s = './vcpkg.exe export';
-
+function GetTriplets(pkgs){
+    let s = '';
     for(const name of pkgs){
-        s += ` ${name}:x86-windows ${name}:x64-windows`
+        s += `${name}:x86-windows ${name}:x64-windows `
     }
-
-    s += ' --nuget';
-
     return s;
 }
 
-console.log(GenScript([
+function GetExportScript(pkgs, type = '--raw'){
+    return `./vcpkg.exe export ${GetTriplets(pkgs)} ${type}`;
+}
+
+function GetInstallScript(pkgs){
+    return `./vcpkg.exe install ${GetTriplets(pkgs)}`;
+}
+
+const allPkgs = [
     'cxxopts',
     'freeimage',
     'jsoncpp',
     'sqlite3',
     'liblzma',
-    'tinyxml2'
-]));
+    'tinyxml2',
+    'curl',
+    'openvr'
+];
+
+console.log(GetInstallScript(allPkgs));
+console.log(GetExportScript(allPkgs));
