@@ -73,7 +73,7 @@ allPkgs = (
     '7zip',
     'berkeleydb',
     'cppcodec', 'curl', 'cxxopts',
-    'directxtex',
+    'directxtex','duktape',
     'eigen3',
     'ffmpeg', 'freeimage',
     'glog',
