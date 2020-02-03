@@ -68,6 +68,12 @@ def MakePkg(pkgs):
     PatchExports()
     ZipExports()
 
+def Install(pkgs):
+    print('Install packages using vcpkg...')
+    vcpkg_exe = os.path.join(g_curDir, '..\\vcpkg.exe')
+    args = [vcpkg_exe, 'install']
+    args.extend(GetTriplets(pkgs))
+    subprocess.run(args)
 
 allPkgs = (
     '7zip',
