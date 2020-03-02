@@ -33,14 +33,15 @@ namespace vcpkg::Commands::Env
     };
 
     // This command should probably optionally take a port
-    void perform_and_exit(const VcpkgCmdArguments& args, const VcpkgPaths& paths, const Triplet& triplet)
+    void perform_and_exit(const VcpkgCmdArguments& args, const VcpkgPaths& paths, Triplet triplet)
     {
         const auto& fs = paths.get_filesystem();
 
         const ParsedArguments options = args.parse_arguments(COMMAND_STRUCTURE);
 
         PortFileProvider::PathsPortFileProvider provider(paths, args.overlay_ports.get());
-        CMakeVars::TripletCMakeVarProvider var_provider(paths);
+        auto var_provider_storage = CMakeVars::make_triplet_cmake_var_provider(paths);
+        auto& var_provider = *var_provider_storage;
 
         var_provider.load_generic_triplet_vars(triplet);
 
@@ -78,7 +79,7 @@ namespace vcpkg::Commands::Env
             args.command_arguments.empty() ? "cmd" : Strings::format("cmd /c %s", args.command_arguments.at(0));
 
         const std::string cmd = Strings::format("%s%s", env_cmd_prefix, env_cmd_suffix);
-        System::cmd_execute_clean(cmd, extra_env);
+        System::cmd_execute(cmd, System::get_modified_clean_environment(extra_env));
         Checks::exit_success(VCPKG_LINE_INFO);
     }
 }

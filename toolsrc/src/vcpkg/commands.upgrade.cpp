@@ -34,7 +34,7 @@ namespace vcpkg::Commands::Upgrade
         nullptr,
     };
 
-    void perform_and_exit(const VcpkgCmdArguments& args, const VcpkgPaths& paths, const Triplet& default_triplet)
+    void perform_and_exit(const VcpkgCmdArguments& args, const VcpkgPaths& paths, Triplet default_triplet)
     {
         const ParsedArguments options = args.parse_arguments(COMMAND_STRUCTURE);
 
@@ -45,7 +45,8 @@ namespace vcpkg::Commands::Upgrade
 
         // Load ports from ports dirs
         PortFileProvider::PathsPortFileProvider provider(paths, args.overlay_ports.get());
-        CMakeVars::TripletCMakeVarProvider var_provider(paths);
+        auto var_provider_storage = CMakeVars::make_triplet_cmake_var_provider(paths);
+        auto& var_provider = *var_provider_storage;
 
         // input sanitization
         const std::vector<PackageSpec> specs = Util::fmap(args.command_arguments, [&](auto&& arg) {
@@ -179,6 +180,8 @@ namespace vcpkg::Commands::Upgrade
                            "--no-dry-run option.\n");
             Checks::exit_fail(VCPKG_LINE_INFO);
         }
+
+        var_provider.load_tag_vars(action_plan, provider);
 
         const Install::InstallSummary summary =
             Install::perform(action_plan, keep_going, paths, status_db, var_provider);

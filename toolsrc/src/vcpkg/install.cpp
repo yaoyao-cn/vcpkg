@@ -146,7 +146,7 @@ namespace vcpkg::Install
 
     static std::vector<file_pack> extract_files_in_triplet(
         const std::vector<StatusParagraphAndAssociatedFiles>& pgh_and_files,
-        const Triplet& triplet,
+        Triplet triplet,
         const size_t remove_chars = 0)
     {
         std::vector<file_pack> output;
@@ -184,7 +184,7 @@ namespace vcpkg::Install
     }
 
     static SortedVector<file_pack> build_list_of_installed_files(
-        const std::vector<StatusParagraphAndAssociatedFiles>& pgh_and_files, const Triplet& triplet)
+        const std::vector<StatusParagraphAndAssociatedFiles>& pgh_and_files, Triplet triplet)
     {
         const size_t installed_remove_char_count = triplet.canonical_name().size() + 1; // +1 for the slash
         std::vector<file_pack> installed_files =
@@ -196,7 +196,7 @@ namespace vcpkg::Install
     InstallResult install_package(const VcpkgPaths& paths, const BinaryControlFile& bcf, StatusParagraphs* status_db)
     {
         const fs::path package_dir = paths.package_dir(bcf.core_paragraph.spec);
-        const Triplet& triplet = bcf.core_paragraph.spec.triplet();
+        Triplet triplet = bcf.core_paragraph.spec.triplet();
         const std::vector<StatusParagraphAndAssociatedFiles> pgh_and_files = get_installed_files(paths, *status_db);
 
         const SortedVector<std::string> package_files =
@@ -339,17 +339,7 @@ namespace vcpkg::Install
             else
                 System::printf("Building package %s...\n", display_name_with_features);
 
-            auto result = [&]() -> Build::ExtendedBuildResult {
-                const auto& scfl = action.source_control_file_location.value_or_exit(VCPKG_LINE_INFO);
-                const Build::BuildPackageConfig build_config{scfl,
-                                                             action.spec.triplet(),
-                                                             action.build_options,
-                                                             var_provider,
-                                                             std::move(action.feature_dependencies),
-                                                             std::move(action.package_dependencies),
-                                                             std::move(action.feature_list)};
-                return Build::build_package(paths, build_config, status_db);
-            }();
+            auto result = Build::build_package(paths, action, var_provider, status_db);
 
             if (BuildResult::DOWNLOADED == result.code)
             {
@@ -639,7 +629,7 @@ namespace vcpkg::Install
     /// Run "install" command.
     /// </summary>
     ///
-    void perform_and_exit(const VcpkgCmdArguments& args, const VcpkgPaths& paths, const Triplet& default_triplet)
+    void perform_and_exit(const VcpkgCmdArguments& args, const VcpkgPaths& paths, Triplet default_triplet)
     {
         // input sanitization
         const ParsedArguments options = args.parse_arguments(COMMAND_STRUCTURE);
@@ -687,22 +677,20 @@ namespace vcpkg::Install
 
         //// Load ports from ports dirs
         PortFileProvider::PathsPortFileProvider provider(paths, args.overlay_ports.get());
-        CMakeVars::TripletCMakeVarProvider var_provider(paths);
+        auto var_provider_storage = CMakeVars::make_triplet_cmake_var_provider(paths);
+        auto& var_provider = *var_provider_storage;
 
         // Note: action_plan will hold raw pointers to SourceControlFileLocations from this map
         auto action_plan = Dependencies::create_feature_install_plan(provider, var_provider, specs, status_db);
 
-        std::vector<FullPackageSpec> install_package_specs;
         for (auto&& action : action_plan.install_actions)
         {
             action.build_options = install_plan_options;
             if (action.request_type != RequestType::USER_REQUESTED)
                 action.build_options.use_head_version = Build::UseHeadVersion::NO;
-
-            install_package_specs.emplace_back(FullPackageSpec{action.spec, action.feature_list});
         }
 
-        var_provider.load_tag_vars(install_package_specs, provider);
+        var_provider.load_tag_vars(action_plan, provider);
 
         // install plan will be empty if it is already installed - need to change this at status paragraph part
         Checks::check_exit(VCPKG_LINE_INFO, !action_plan.empty(), "Install plan cannot be empty");
