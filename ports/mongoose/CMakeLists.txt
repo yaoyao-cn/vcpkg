@@ -4,7 +4,7 @@ project(mongoose C)
 
 include(GNUInstallDirs)
 
-option(ENABLE_SSL "Build with openssl support" ON)
+option(ENABLE_SSL "Build with openssl support" OFF)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
