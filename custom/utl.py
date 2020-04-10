@@ -84,7 +84,7 @@ allPkgs = (
     'ffmpeg', 'freeimage',
     'glog',
     'jsoncpp',
-    'libjpeg-turbo', 'lmdb',
+    'libjpeg-turbo', 'lmdb', 'libsndfile',
     'md5', 'mongoose',
     'openal-soft', 'openvr',
     'poly2tri', 'portaudio',
