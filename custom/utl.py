@@ -86,7 +86,7 @@ allPkgs = (
     'jsoncpp',
     'libjpeg-turbo', 'lmdb', 'libsndfile',
     'md5', 'mongoose',
-    'openal-soft', 'openvr',
+    'ompl[app]', 'openal-soft', 'openvr',
     'poly2tri', 'portaudio',
     'sqlite3','sqlitecpp',
     'tinyxml',
