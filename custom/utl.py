@@ -76,15 +76,14 @@ def Install(pkgs):
     subprocess.run(args)
 
 allPkgs = (
-    '7zip',
     'berkeleydb',
-    'cppcodec', 'curl', 'cxxopts',
+    'curl', 'cxxopts',
     'directxtex','duktape',
     'eigen3',
     'ffmpeg', 'freeimage',
     'glog',
     'jsoncpp',
-    'libjpeg-turbo', 'lmdb', 'libsndfile',
+    'libjpeg-turbo', 'libsndfile',
     'md5', 'mongoose',
     'ompl[app]', 'openal-soft', 'openvr',
     'poly2tri', 'portaudio',
