@@ -76,6 +76,7 @@ def Install(pkgs):
     subprocess.run(args)
 
 allPkgs = (
+    '7zip',
     'berkeleydb',
     'curl', 'cxxopts',
     'directxtex','duktape',
