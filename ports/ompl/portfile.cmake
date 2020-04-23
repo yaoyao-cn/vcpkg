@@ -19,7 +19,7 @@ vcpkg_extract_source_archive_ex(
     OUT_SOURCE_PATH SOURCE_PATH
     ARCHIVE ${ARCHIVE}
     REF ${OMPL_VERSION}
-	PATCHES fix-findeigen3.patch
+    PATCHES fix-findeigen3.patch
 )
 vcpkg_configure_cmake(
     SOURCE_PATH ${SOURCE_PATH}
@@ -57,8 +57,9 @@ if ("app" IN_LIST FEATURES)
     )
 endif()
 
+if(VCPKG_LIBRARY_LINKAGE STREQUAL "static")
+    file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/bin" "${CURRENT_PACKAGES_DIR}/debug/bin")
+endif()
+
 # Handle copyright
 file(INSTALL ${SOURCE_PATH}/LICENSE DESTINATION ${CURRENT_PACKAGES_DIR}/share/${PORT} RENAME copyright)
-
-# Post-build test for cmake libraries
-# vcpkg_test_cmake(PACKAGE_NAME ompl)
