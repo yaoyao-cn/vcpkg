@@ -4,8 +4,8 @@ vcpkg_fail_port_install(ON_TARGET "linux" "osx")
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO GiovanniDicanio/WinReg
-    REF e35d0e2f7c5a9c8a502df3ae79cef0ee9308bcbc #v2.2.0
-    SHA512 7883b3016475bfd386564fa0a88b570db381d1109421ca6b2318342cc8f1fb344d380ef6bd75f904c7b4084a70f6c893583a68c0bc41c027ac12ef3cfaec3476 
+    REF ffb5ae9eb6609847c3a3a98d8da6192e2f67be79 #v3.0.1
+    SHA512 6a9fecb09769a3d859d09421dd9c894fb1fe1ed90ede3eb899dba0a4c7a01f69192bd5b640bba6aea675de9e025a8121230f1e36d2354ed9fb79f1f2167299b4 
     HEAD_REF master
 )
 
