@@ -2,6 +2,7 @@ import os
 import subprocess
 import re
 import shutil
+import argparse
 
 g_curDir = os.path.dirname(os.path.realpath(__file__))
 
@@ -95,4 +96,15 @@ allPkgs = (
 )
 
 if __name__ == '__main__':
-    MakePkg(allPkgs)
+    parser = argparse.ArgumentParser(description='Install or export vkpkg packages.')
+    parser.add_argument('-i', '--install', action='store_true', help='install packages')
+    parser.add_argument('-e', '--export', action='store_true', help='export packages')
+
+    args = parser.parse_args()
+
+    if args.export:
+        MakePkg(allPkgs)
+    elif args.install:
+        Install(allPkgs)
+    else:
+        parser.print_help()
