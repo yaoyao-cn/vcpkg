@@ -83,7 +83,7 @@ allPkgs = (
     'directxtex','duktape',
     'eigen3',
     'ffmpeg', 'freeimage',
-    'glog',
+    'glog', 'geos',
     'jsoncpp',
     'libjpeg-turbo', 'libsndfile',
     'md5', 'mongoose',
