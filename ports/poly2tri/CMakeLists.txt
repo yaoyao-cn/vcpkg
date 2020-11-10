@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-cmake_minimum_required(VERSION 3.14)
-
-project(poly2tri)
-
-file(GLOB SOURCES poly2tri/common/*.cc poly2tri/sweep/*.cc)
-
-add_library(poly2tri STATIC ${SOURCES})
-
-install(TARGETS poly2tri)
-
-=======
 cmake_minimum_required(VERSION 3.0)
 
 project(poly2tri LANGUAGES C CXX)
@@ -67,4 +55,3 @@ install (EXPORT ${PROJECT_NAME}Targets
     NAMESPACE ${PROJECT_NAME}::
     DESTINATION "${INSTALL_CMAKE_DIR}"
 )
->>>>>>> upstream/master
