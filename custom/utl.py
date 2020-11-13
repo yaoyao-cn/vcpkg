@@ -50,6 +50,8 @@ def PatchExports():
             print('patching %s'%dirName)
             shutil.copy(os.path.join(g_curDir, '..\\', 'vcpkg.exe'), os.path.join(g_curDir, '..\\', dirName, 'vcpkg.exe'))
             shutil.copy(os.path.join(g_curDir, 'readme.md'), os.path.join(g_curDir, '..\\', dirName, 'readme.md'))
+            shutil.copytree(os.path.join(g_curDir, '..\\', 'triplets'), os.path.join(g_curDir, '..\\', dirName, 'triplets'))
+            shutil.copy(os.path.join(g_curDir, '..\\', 'scripts\\ports.cmake'), os.path.join(g_curDir, '..\\', dirName, 'scripts\\ports.cmake'))
 
 def ZipExports():
     print('Compress exported packages to zip archive...')
@@ -85,7 +87,7 @@ allPkgs = (
     'ffmpeg', 'freeimage',
     'glog', 'geos',
     'jsoncpp',
-    'libjpeg-turbo', 'libsndfile',
+    'libgeotiff', 'libjpeg-turbo', 'libsndfile',
     'md5', 'mongoose',
     'ompl[app]', 'openal-soft', 'openvr',
     'poly2tri', 'portaudio',
