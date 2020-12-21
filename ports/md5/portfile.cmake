@@ -17,10 +17,9 @@ vcpkg_configure_cmake(
 
 vcpkg_install_cmake()
 
-file(COPY ${SOURCE_PATH}/md5.h DESTINATION ${CURRENT_PACKAGES_DIR}/include)
-
-# Handle copyright
-file(COPY ${SOURCE_PATH}/LICENSE DESTINATION ${CURRENT_PACKAGES_DIR}/share/md5)
-file(RENAME ${CURRENT_PACKAGES_DIR}/share/md5/LICENSE ${CURRENT_PACKAGES_DIR}/share/md5/copyright)
+file(REMOVE_RECURSE 
+    "${CURRENT_PACKAGES_DIR}/debug/include"
+    "${CURRENT_PACKAGES_DIR}/debug/share"
+)
 
 vcpkg_copy_pdbs()
