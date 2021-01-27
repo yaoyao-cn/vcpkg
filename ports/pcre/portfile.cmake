@@ -5,7 +5,8 @@ set(PATCHES
         # Suppress MSVC compiler warnings C4703, C4146, C4308, which fixes errors
         # under x64-uwp and arm-uwp
         pcre-8.44_suppress_cmake_and_compiler_warnings-errors.patch
-        export-cmake-targets.patch)
+        export-cmake-targets.patch
+        disable_strtoq.patch)
 
 vcpkg_download_distfile(ARCHIVE
     URLS "https://ftp.pcre.org/pub/pcre/pcre-${PCRE_VERSION}.zip"

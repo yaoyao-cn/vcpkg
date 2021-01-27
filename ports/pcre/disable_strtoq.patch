@@ -1,0 +1,13 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index bcef3ae..933c453 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -105,7 +105,7 @@ CHECK_FUNCTION_EXISTS(bcopy     HAVE_BCOPY)
+ CHECK_FUNCTION_EXISTS(memmove   HAVE_MEMMOVE)
+ CHECK_FUNCTION_EXISTS(strerror  HAVE_STRERROR)
+ CHECK_FUNCTION_EXISTS(strtoll   HAVE_STRTOLL)
+-CHECK_FUNCTION_EXISTS(strtoq    HAVE_STRTOQ)
++#CHECK_FUNCTION_EXISTS(strtoq    HAVE_STRTOQ)
+ CHECK_FUNCTION_EXISTS(_strtoi64 HAVE__STRTOI64)
+ 
+ CHECK_TYPE_SIZE("long long"             LONG_LONG)
