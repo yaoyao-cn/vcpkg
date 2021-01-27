@@ -1,0 +1,16 @@
+diff --git a/Source/FreeImage/Plugin.cpp b/Source/FreeImage/Plugin.cpp
+index 0119ba7..52759d7 100644
+--- a/Source/FreeImage/Plugin.cpp
++++ b/Source/FreeImage/Plugin.cpp
+@@ -274,8 +274,11 @@ FreeImage_Initialise(BOOL load_local_plugins_only) {
+ 			s_plugins->AddNode(InitJP2);
+ 			s_plugins->AddNode(InitPFM);
+ 			s_plugins->AddNode(InitPICT);
++// vcpkg: disable libraw because libraw can not compiled on android platform(error: use of undeclared identifier 'swab')
++#if 0
+ 			s_plugins->AddNode(InitRAW);
+ 			s_plugins->AddNode(InitWEBP);
++#endif
+ #if !(defined(_MSC_VER) && (_MSC_VER <= 1310))
+ 			s_plugins->AddNode(InitJXR);
+ #endif // unsupported by MS Visual Studio 2003 !!!

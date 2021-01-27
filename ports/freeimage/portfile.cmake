@@ -6,6 +6,7 @@ vcpkg_from_sourceforge(
     SHA512 9d9cc7e2d57552c3115e277aeb036e0455204d389026b17a3f513da5be1fd595421655488bb1ec2f76faebed66049119ca55e26e2a6d37024b3fb7ef36ad4818
     PATCHES
         disable-plugins-depending-on-internal-third-party-libraries.patch
+        disable_libraw_webp.patch
         use-external-jpeg.patch
         use-external-jxrlib.patch
         use-external-libtiff.patch

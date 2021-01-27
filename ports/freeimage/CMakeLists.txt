@@ -16,7 +16,6 @@ find_package(TIFF     REQUIRED)
 find_package(OpenJPEG REQUIRED)
 find_package(WebP     REQUIRED)
 find_package(JXR      REQUIRED)
-find_package(LibRaw   REQUIRED)
 find_package(OpenEXR  REQUIRED)
 
 option(BUILD_SHARED_LIBS "Build shared libraries" ON)
@@ -57,6 +56,13 @@ file(GLOB METADATA_SRCS ${REAL_SOURCE_DIR}/Metadata/*.cpp)
 # The G3 plugin is disabled because it require the private copy of tiff
 list(REMOVE_ITEM FREEIMAGE_SRCS ${REAL_SOURCE_DIR}/FreeImage/PluginG3.cpp)
 
+# disable libraw because libraw can not compiled on android platform(error: use of undeclared identifier 'swab')
+list(REMOVE_ITEM FREEIMAGE_SRCS ${REAL_SOURCE_DIR}/FreeImage/PluginRAW.cpp)
+
+# disable webp because of unkonwn link error when used by freeimge
+list(REMOVE_ITEM FREEIMAGE_SRCS ${REAL_SOURCE_DIR}/FreeImage/PluginWebP.cpp)
+
+
 # The JPEGTransform plugin is disable because it requires a private copy of jpeg
 list(REMOVE_ITEM FREEIMAGE_TOOLKIT_SRCS ${REAL_SOURCE_DIR}/FreeImageToolkit/JPEGTransform.cpp)
 
@@ -95,7 +101,6 @@ target_include_directories(FreeImage PRIVATE ${REAL_SOURCE_DIR}
                                              ${OPENJPEG_INCLUDE_DIRS}
                                              ${WEBP_INCLUDE_DIRS}
                                              ${JXR_INCLUDE_DIRS}
-                                             ${LibRaw_INCLUDE_DIRS}
                                              ${CMAKE_CURRENT_BINARY_DIR}
                                     PUBLIC $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 
@@ -107,7 +112,6 @@ target_link_libraries(FreeImage ${ZLIB_LIBRARIES}
                                 ${OPENJPEG_LIBRARIES}
                                 ${WEBP_LIBRARIES}
                                 ${JXR_LIBRARIES}
-                                ${LibRaw_LIBRARIES}
                                 OpenEXR::IlmImf)
 
 target_compile_definitions(FreeImage PRIVATE ${PNG_DEFINITIONS})
@@ -152,7 +156,6 @@ find_dependency(TIFF)
 find_dependency(OpenJPEG)
 find_dependency(WebP)
 find_dependency(JXR)
-find_dependency(LibRaw)
 find_dependency(OpenEXR)
 include(\"\${CMAKE_CURRENT_LIST_DIR}/freeimage-targets.cmake\")
 ")

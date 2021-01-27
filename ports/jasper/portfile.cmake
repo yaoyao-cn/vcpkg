@@ -20,6 +20,7 @@ vcpkg_configure_cmake(
         -DJAS_ENABLE_LIBJPEG=ON
         -DJAS_ENABLE_DOC=OFF
         -DJAS_ENABLE_PROGRAMS=OFF
+        -DJAS_ENABLE_OPENGL=OFF
         -DJAS_ENABLE_SHARED=${JAS_ENABLE_SHARED}
     OPTIONS_DEBUG
         -DCMAKE_DEBUG_POSTFIX=d # Due to CMakes FindJasper
