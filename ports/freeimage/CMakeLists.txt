@@ -14,7 +14,7 @@ find_package(PNG      REQUIRED)
 find_package(JPEG     REQUIRED)
 find_package(TIFF     REQUIRED)
 find_package(OpenJPEG REQUIRED)
-find_package(WebP     REQUIRED)
+#find_package(WebP     REQUIRED)
 find_package(JXR      REQUIRED)
 find_package(OpenEXR  REQUIRED)
 
@@ -99,7 +99,6 @@ target_include_directories(FreeImage PRIVATE ${REAL_SOURCE_DIR}
                                              ${TIFF_INCLUDE_DIRS}
                                              ${PNG_INCLUDE_DIRS}
                                              ${OPENJPEG_INCLUDE_DIRS}
-                                             ${WEBP_INCLUDE_DIRS}
                                              ${JXR_INCLUDE_DIRS}
                                              ${CMAKE_CURRENT_BINARY_DIR}
                                     PUBLIC $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
@@ -110,7 +109,6 @@ target_link_libraries(FreeImage ${ZLIB_LIBRARIES}
                                 ${TIFF_LIBRARIES}
                                 ${PNG_LIBRARIES}
                                 ${OPENJPEG_LIBRARIES}
-                                ${WEBP_LIBRARIES}
                                 ${JXR_LIBRARIES}
                                 OpenEXR::IlmImf)
 
@@ -154,7 +152,6 @@ find_dependency(PNG)
 find_dependency(JPEG)
 find_dependency(TIFF)
 find_dependency(OpenJPEG)
-find_dependency(WebP)
 find_dependency(JXR)
 find_dependency(OpenEXR)
 include(\"\${CMAKE_CURRENT_LIST_DIR}/freeimage-targets.cmake\")
