@@ -1,0 +1,37 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index fcd9024..088f1c0 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -216,17 +216,25 @@ if(BROTLI_PARENT_DIRECTORY)
+ endif()
+ 
+ # Build the brotli executable
+-add_executable(brotli ${BROTLI_CLI_C})
+-target_link_libraries(brotli ${BROTLI_LIBRARIES_STATIC})
++
++option(BROTLI_BUILD_EXECUTABLE "Build brotli executable(default ON)" ON)
++
++if(BROTLI_BUILD_EXECUTABLE)
++  add_executable(brotli ${BROTLI_CLI_C})
++  target_link_libraries(brotli ${BROTLI_LIBRARIES_STATIC})
++endif()
+ 
+ # Installation
+ if(NOT BROTLI_EMSCRIPTEN)
+ if(NOT BROTLI_BUNDLED_MODE)
+-  install(
+-    TARGETS brotli
+-    RUNTIME DESTINATION tools/brotli
+-    CONFIGURATIONS Release
+-  )
++
++  if(BROTLI_BUILD_EXECUTABLE)
++    install(
++      TARGETS brotli
++      RUNTIME DESTINATION tools/brotli
++      CONFIGURATIONS Release
++    )
++  endif()
+ 
+   if(BUILD_SHARED_LIBS)
+   install(

@@ -8,12 +8,15 @@ vcpkg_from_github(
         install.patch
         fix-arm-uwp.patch
         pkgconfig.patch
+        add-brotli-build-executable-option.patch
 )
 
 vcpkg_configure_cmake(
     SOURCE_PATH ${SOURCE_PATH}
     PREFER_NINJA
-    OPTIONS -DBROTLI_DISABLE_TESTS=ON
+    OPTIONS
+        -DBROTLI_DISABLE_TESTS=ON
+        -DBROTLI_BUILD_EXECUTABLE=OFF
 )
 
 vcpkg_install_cmake()
