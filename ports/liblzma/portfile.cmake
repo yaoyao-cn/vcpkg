@@ -8,6 +8,7 @@ vcpkg_from_github(
         enable-uwp-builds.patch
         fix_config_include.patch
         win_output_name.patch # Fix output name on Windows. Autotool build does not generate lib prefixed libraries on windows. 
+        add-build-command-option.patch
 )
 
 vcpkg_configure_cmake(
@@ -15,6 +16,7 @@ vcpkg_configure_cmake(
     PREFER_NINJA
     OPTIONS
         "-DCMAKE_DEBUG_POSTFIX=d" # This was in the old vcpkg CMakeLists.txt and I don't intend to fix it all over vcpkg 
+        -DBUILD_COMMAND_LINE_TOOLS=OFF
 )
 vcpkg_install_cmake()
 vcpkg_copy_pdbs()
