@@ -5,6 +5,7 @@ import shutil
 import argparse
 
 g_curDir = os.path.dirname(os.path.realpath(__file__))
+g_export_reg = '^vcpkg-export-.*[0-9][0-9][0-9]$'
 
 def GetTriplets(pkgs):
     s = []
@@ -16,13 +17,13 @@ def GetTriplets(pkgs):
 def DeleteOldExports():
     print('Find and delete old exports from vkpkg...')
     for dirName in (os.listdir(os.path.join(g_curDir, '..\\'))):
-        if re.match('^vcpkg-export-.*', dirName):
+        if re.match(g_export_reg, dirName):
             print('deleting %s'%dirName)
             fullName = os.path.join(g_curDir, '..\\', dirName)
             if os.path.isdir(fullName):
                 shutil.rmtree(fullName)
-            elif os.path.isfile(fullName):
-                os.remove(fullName)
+            # elif os.path.isfile(fullName):
+            #     os.remove(fullName)
 
 def DoExport(pkgs, extraArgs):
     print('Export packages using vcpkg...')
@@ -36,7 +37,7 @@ def CleanupExport():
     #delete pdbs
     print('Delete pdbs...')
     for dirName in (os.listdir(os.path.join(g_curDir, '..\\'))):
-        if re.match('^vcpkg-export-.*', dirName):
+        if re.match(g_export_reg, dirName):
             for root, dirs, files in os.walk(os.path.join(g_curDir, '..\\', dirName)):
                 for name in files:
                     if os.path.splitext(name)[-1] == '.pdb':
@@ -46,7 +47,7 @@ def CleanupExport():
 def PatchExports():
     print('Patching exports...')
     for dirName in (os.listdir(os.path.join(g_curDir, '..\\'))):
-        if re.match('^vcpkg-export-.*', dirName):
+        if re.match(g_export_reg, dirName):
             print('patching %s'%dirName)
             shutil.copy(os.path.join(g_curDir, '..\\', 'vcpkg.exe'), os.path.join(g_curDir, '..\\', dirName, 'vcpkg.exe'))
             shutil.copy(os.path.join(g_curDir, 'readme.md'), os.path.join(g_curDir, '..\\', dirName, 'readme.md'))
@@ -56,7 +57,7 @@ def PatchExports():
 def ZipExports():
     print('Compress exported packages to zip archive...')
     for dirName in (os.listdir(os.path.join(g_curDir, '..\\'))):
-        if re.match('^vcpkg-export-.*', dirName):
+        if re.match(g_export_reg, dirName):
             print('compress %s'%dirName)
             shutil.make_archive(
                 os.path.join(g_curDir, '..\\', dirName), 'zip',
