@@ -5,7 +5,7 @@ import shutil
 import argparse
 
 g_curDir = os.path.dirname(os.path.realpath(__file__))
-g_export_reg = '^vcpkg-export-.*[0-9][0-9][0-9]$'
+g_export_reg = '^vcpkg-export-[0-9]{8}-[0-9]{6}$'
 
 def GetTriplets(pkgs):
     s = []
