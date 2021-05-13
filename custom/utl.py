@@ -22,8 +22,6 @@ def DeleteOldExports():
             fullName = os.path.join(g_curDir, '..\\', dirName)
             if os.path.isdir(fullName):
                 shutil.rmtree(fullName)
-            # elif os.path.isfile(fullName):
-            #     os.remove(fullName)
 
 def DoExport(pkgs, extraArgs):
     print('Export packages using vcpkg...')
