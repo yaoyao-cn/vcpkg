@@ -10,7 +10,7 @@ g_export_reg = '^vcpkg-export-[0-9]{8}-[0-9]{6}$'
 def GetTriplets(pkgs):
     s = []
     for name in pkgs:
-        s.append("%s:x86-windows"%(name))
+        #s.append("%s:x86-windows"%(name))
         s.append("%s:x64-windows"%(name))
     return s
 
@@ -22,8 +22,6 @@ def DeleteOldExports():
             fullName = os.path.join(g_curDir, '..\\', dirName)
             if os.path.isdir(fullName):
                 shutil.rmtree(fullName)
-            # elif os.path.isfile(fullName):
-            #     os.remove(fullName)
 
 def DoExport(pkgs, extraArgs):
     print('Export packages using vcpkg...')
