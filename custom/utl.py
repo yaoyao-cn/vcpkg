@@ -89,7 +89,7 @@ allPkgs = (
     'libgeotiff', 'libjpeg-turbo', 'libsndfile',
     'md5', 'mongoose',
     'ompl[app]', 'openal-soft', 'openvr',
-    'poly2tri', 'portaudio',
+    'poly2tri', 'portaudio', 'pugixml',
     'sqlite3','sqlitecpp',
     'tinyxml',
     'vcglib',
