@@ -1,6 +1,6 @@
 {
-    "name": "md5",
-    "version-string": "1.0.0.3",
-    "homepage": "https://github.com/yaoyao-cn/md5",
-    "description": "MD5 C++ class convert from Frank Thilo (thilo@unix-ag.org) for bzflag (http://www.bzflag.org)"
+  "name": "md5",
+  "version-string": "1.0.0.3",
+  "description": "MD5 C++ class convert from Frank Thilo (thilo@unix-ag.org) for bzflag (http://www.bzflag.org)",
+  "homepage": "https://github.com/yaoyao-cn/md5"
 }
