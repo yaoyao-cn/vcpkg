@@ -88,7 +88,7 @@ allPkgs = (
     'jsoncpp',
     'libgeotiff', 'libjpeg-turbo', 'libsndfile',
     'md5', 'mongoose',
-    'ompl', 'openal-soft', 'openvr',
+    'openal-soft', 'openvr',
     'poly2tri', 'portaudio', 'pugixml',
     'sqlite3','sqlitecpp',
     'tinyxml',
