@@ -83,7 +83,7 @@ allPkgs = (
     'curl', 'cxxopts',
     'directxtex','duktape',
     'eigen3',
-    'ffmpeg', 'freeimage',
+    'fcl', 'ffmpeg', 'freeimage',
     'glog', 'geos',
     'jsoncpp',
     'libgeotiff', 'libjpeg-turbo', 'libsndfile',
