@@ -90,6 +90,7 @@ allPkgs = (
     'md5', 'mongoose',
     'openal-soft', 'openvr',
     'poly2tri', 'portaudio', 'pugixml',
+    'qt5',
     'sqlite3','sqlitecpp',
     'tinyxml',
     'vcglib',
