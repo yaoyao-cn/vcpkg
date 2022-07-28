@@ -86,7 +86,7 @@ allPkgs = (
     'fcl', 'ffmpeg', 'freeimage', 'flatbuffers',
     'glog', 'geos',
     'jsoncpp',
-    'libgeotiff', 'libjpeg-turbo', 'libsndfile',
+    'libgeotiff', 'libjpeg-turbo', 'libsndfile', 'lz4',
     'md5', 'mongoose',
     'openal-soft', 'openvr',
     'poly2tri', 'portaudio', 'pugixml',
