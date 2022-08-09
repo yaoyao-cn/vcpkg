@@ -80,7 +80,7 @@ def Install(pkgs):
 allPkgs = (
     '7zip',
     'berkeleydb',
-    'curl', 'cxxopts',
+    'curl', 'cxxopts', 'concurrentqueue',
     'directxtex','duktape',
     'eigen3',
     'fcl', 'ffmpeg', 'freeimage', 'flatbuffers',
