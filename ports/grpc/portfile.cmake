@@ -5,8 +5,8 @@ endif()
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO grpc/grpc
-    REF v1.50.1
-    SHA512 7c90ec9fd073980218f69eda704dbfb526dbd2f7f864135bdc6bd064789d1d8889127a253493196e617b0b90dddf1204ca9344c5e585ab0f0ca5c2a2a0a22ef1
+    REF "v${VERSION}"
+    SHA512 91c2406ed4198509ac0d5360b3da6898fa4f40f459eb6fff541faa44cc238eed98fd7489e7ef7a80a6f4a318bc5b9130eaa0ba1beaa358d1c074fc82825648ff
     HEAD_REF master
     PATCHES
         00001-fix-uwp.patch
@@ -15,10 +15,9 @@ vcpkg_from_github(
         00004-link-gdi32-on-windows.patch
         00005-fix-uwp-error.patch
         00009-use-system-upb.patch
-        snprintf.patch
-        00012-fix-use-cxx17.patch
-        00014-pkgconfig-upbdefs.patch
         00015-disable-download-archive.patch
+        00016-fix-plugin-targets.patch
+        00017-abseil.patch
 )
 
 if(NOT TARGET_TRIPLET STREQUAL HOST_TRIPLET)
@@ -51,9 +50,7 @@ vcpkg_cmake_configure(
         -DgRPC_SSL_PROVIDER=package
         -DgRPC_PROTOBUF_PROVIDER=package
         -DgRPC_ABSL_PROVIDER=package
-        -DgRPC_UPB_PROVIDER=package
         -DgRPC_RE2_PROVIDER=package
-        -DgRPC_PROTOBUF_PACKAGE_TYPE=CONFIG
         -DgRPC_CARES_PROVIDER=${cares_CARES_PROVIDER}
         -DgRPC_BENCHMARK_PROVIDER=none
         -DgRPC_INSTALL_BINDIR:STRING=bin
@@ -95,4 +92,4 @@ else()
     vcpkg_fixup_pkgconfig()
 endif()
 
-file(INSTALL "${SOURCE_PATH}/LICENSE" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}" RENAME copyright)
+vcpkg_install_copyright(FILE_LIST "${SOURCE_PATH}/LICENSE")

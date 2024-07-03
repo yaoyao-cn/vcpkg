@@ -1,32 +1,18 @@
 vcpkg_check_linkage(ONLY_STATIC_LIBRARY)
 
-if("public-preview" IN_LIST FEATURES)
-    vcpkg_from_github(
-        OUT_SOURCE_PATH SOURCE_PATH
-        REPO Azure/azure-c-shared-utility
-        REF 42574842914591aadc77701aac72f18cc72319ad
-        SHA512 dfe6ccede4bebdb3a39fbfea1dc55ddca57cced0d2656ee4bed1a5e5c9c434e1f2d892eb4e29bbb424cb9a02f2374a95fb9a020442bea580d39c242efad1b789
-        HEAD_REF master
-        PATCHES
-            fix-install-location-preview.patch
-            fix-utilityFunctions-conditions-preview.patch
-            disable-error.patch
-            improve-dependencies-preview.patch
-    )
-else()
-    vcpkg_from_github(
-        OUT_SOURCE_PATH SOURCE_PATH
-        REPO Azure/azure-c-shared-utility
-        REF 9e4322c9d88095ed276bf7e4b31b87b82b1c4d86
-        SHA512 0ede2a30ed787028a48602111be7cebc65593a84a8b3dc94ed34917f44355a180d8b8acf2b6404e47428fe8f761c11485199e9bd2e9aa6628548c585357f63e8
-        HEAD_REF master
-        PATCHES
-            fix-install-location.patch
-            fix-utilityFunctions-conditions.patch
-            disable-error.patch
-            improve-dependencies.patch
-    )
-endif()
+vcpkg_from_github(
+    OUT_SOURCE_PATH SOURCE_PATH
+    REPO Azure/azure-c-shared-utility
+    REF 51d6f3f7246876051f713c7abed28f909bf604e3
+    SHA512 f0d88f10905739c30f43bf20861d99e7146d95ae80f1bd56979b22ef57fbbe9825bf3be9b937806e65c881ef1ba4932dc783fbabfa8ca80cc80329a409f8c20b
+    HEAD_REF master
+    PATCHES
+        fix-install-location.patch
+        fix-utilityFunctions-conditions.patch
+        disable-error.patch
+        improve-dependencies.patch
+        modify-POSIX-c-version.patch
+)
 
 vcpkg_cmake_configure(
     SOURCE_PATH "${SOURCE_PATH}"
@@ -47,6 +33,6 @@ file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include" "${CURRENT_PACKAGES_
 
 file(COPY "${SOURCE_PATH}/configs/azure_iot_build_rules.cmake" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}")
 
-configure_file("${SOURCE_PATH}/LICENSE" "${CURRENT_PACKAGES_DIR}/share/${PORT}/copyright" COPYONLY)
+vcpkg_install_copyright(FILE_LIST "${SOURCE_PATH}/LICENSE")
 
 vcpkg_copy_pdbs()

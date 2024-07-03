@@ -1,6 +1,7 @@
 {
   "name": "pangolin",
   "version": "0.8",
+  "port-version": 3,
   "description": "Lightweight GUI Library",
   "homepage": "https://github.com/stevenlovegrove/Pangolin",
   "license": "MIT",
@@ -8,6 +9,7 @@
   "dependencies": [
     "eigen3",
     "glew",
+    "palsigslot",
     {
       "name": "vcpkg-cmake",
       "host": true
@@ -95,7 +97,10 @@
     "tiff": {
       "description": "Build support for libtiff image input",
       "dependencies": [
-        "tiff"
+        {
+          "name": "tiff",
+          "default-features": false
+        }
       ]
     },
     "tools": {
