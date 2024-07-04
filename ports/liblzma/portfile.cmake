@@ -28,6 +28,7 @@ vcpkg_cmake_configure(
         -DCREATE_LZMA_SYMLINKS=OFF
         -DCMAKE_MSVC_DEBUG_INFORMATION_FORMAT=   # using flags from (vcpkg) toolchain
         -DENABLE_NLS=OFF # nls is not supported by this port, yet
+        -DALLOW_ARM64_CRC32=OFF # fix error: use of undeclared identifier 'HWCAP_CRC32' on android platform
     MAYBE_UNUSED_VARIABLES
         CMAKE_MSVC_DEBUG_INFORMATION_FORMAT
         CREATE_XZ_SYMLINKS
