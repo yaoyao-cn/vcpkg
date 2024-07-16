@@ -8,6 +8,8 @@ vcpkg_from_github(
     REF "Clipper2_${VERSION}"
     SHA512 64028ab0610dc2b44e48a299d8498de59807f36d8471c4758e3bbf87de682b0d0a29d027a495f36dd5432737cedc44f09a8336f0d620846d58616244c72e226c
     HEAD_REF main
+    PATCHES
+        ohos-werror-fix.patch
 )
 
 vcpkg_cmake_configure(
